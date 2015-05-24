@@ -14,14 +14,14 @@ makeCacheMatrix <- function(matrix = matrix()) {
 }
 
 
-cachemean <- function(x, ...) {
-    i<- x$getmean()
-    if(!is.null(m)) {
+cacheSolve <- function(x, ...) {
+    i<- x$getinv()
+    if(!is.null(i)) {
         message("getting cached data")
-        return(m)
+        return(i)
     }
     data <- x$get()
-    i<- mean(data, ...)
-    x$setmean(m)
-    m
+    i<- solve(data, ...)
+    x$setinv(i)
+    i
 }
