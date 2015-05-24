@@ -1,14 +1,27 @@
-makeVector <- function(x = numeric()) {
-  m <- NULL
+makeCacheMatrix <- function(matrix = matrix()) {
+  i<- NULL
   set <- function(y) {
-    x <<- y
-    m <<- NULL
+    matrix <<- y
+    i<<- NULL
   }
-  get <- function() x
-  setmean <- function(mean) m <<- mean
-  getmean <- function() m
+  get <- function() matrix
+  setinv <- function(matrix) i<<- solve(matrix)
+  getinv <- function() i
   list(set = set, get = get,
-       setmean = setmean,
-       getmean = getmean)
+       setinv = setinv,
+       getinv = getinv)
   
+}
+
+
+cachemean <- function(x, ...) {
+    i<- x$getmean()
+    if(!is.null(m)) {
+        message("getting cached data")
+        return(m)
+    }
+    data <- x$get()
+    i<- mean(data, ...)
+    x$setmean(m)
+    m
 }
