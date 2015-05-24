@@ -10,7 +10,7 @@ makeCacheMatrix <- function(matrix = matrix()) {
       get <- function() matrix
       
 #Set inverse of the matrix
-      setinv <- function(matrix) i<<- solve(matrix)
+      setinv <- function(matrix) i<<- matrix
      
 #Get inverse of the matrix
        getinv <- function() i
@@ -32,7 +32,8 @@ cacheSolve <- function(x, ...) {
         message("getting cached data")
         return(i)
     }
-#Calculate the inverse as it is not present in the cache.
+#Calculate the inverse if it is not present in the cache and
+#set the inverse in the cache.
     data <- x$get()
     i<- solve(data, ...)
     x$setinv(i)
